@@ -192,8 +192,9 @@ module SparseMatrix
         end
       else
         ia.each_cons(2).each_with_index do |indexes, row|
-          a[indexes.first...indexes.last].each_with_index do |element, index|
-            yield [element, row, ja[index]]
+          row_start, row_end = *indexes
+          a[row_start...row_end].each_with_index do |element, index|
+            yield [element, row, ja[row_start + index]]
           end
         end
       end
