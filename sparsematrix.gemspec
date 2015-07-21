@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Reed Kraft-Murphy']
   spec.email         = ['reed@reedmurphy.net']
 
-  spec.summary       = 'Yale sparse matrix'
-  spec.description   = 'Yale sparse matrix'
-  spec.homepage      = 'https://github.com/RWJMurphy/'
+  spec.summary       = 'Sparse matrix implementations (just Yale currently) in pure Ruby.'
+  spec.description   = 'Sparse matrix implementations (just Yale currently) in pure Ruby.'
+  spec.homepage      = 'https://github.com/RWJMurphy/ruby-sparsematrix'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
