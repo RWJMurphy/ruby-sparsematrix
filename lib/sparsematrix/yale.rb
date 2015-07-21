@@ -101,42 +101,28 @@ module SparseMatrix
     # @param value the value to set
     # @return the value that was passed in
     def []=(row, column, value)
-      row_count_l = row_count
-      if row >= row_count_l
-        add_rows(row - row_count_l + 1)
-        row_count_l = row_count
+      if row >= row_count
+        add_rows(row - row_count + 1)
       end
-      row_start, row_end = row_index[row], row_index[row + 1]
-      index = row_start
-      current_column = nil
+
+      index = row_start = row_index[row]
+      row_end = row_index[row + 1]
+
       while index < row_end
-        if index_column[index] >= column
-          current_column = column
-          break
+        current_column = index_column[index]
+        if current_column == column
+          @elements[index] = value
+          return value
         end
+        break if current_column > column
         index += 1
       end
-      index = nil unless current_column
 
-      if index.nil?
-        @elements.insert(row_end, value)
-        @index_column.insert(row_end, column)
-        while row < row_count_l
-          row += 1
-          @row_index[row] += 1
-        end
-      else
-        if column == current_column
-          # replacing an element
-          @elements[index] = value
-        else
-          @elements.insert(index, value)
-          @index_column.insert(index, value)
-          while row < row_count_l
-            row += 1
-            @row_index[row] += 1
-          end
-        end
+      @elements.insert(index, value)
+      @index_column.insert(index, column)
+      while row < row_count
+        row += 1
+        @row_index[row] += 1
       end
       value
     end
