@@ -1,8 +1,8 @@
 # SparseMatrix
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/sparsematrix`. To experiment with that code, run `bin/console` for an interactive prompt.
+Sparse matrix implementations (just Yale currently) in pure Ruby.
 
-TODO: Delete this and the text above, and describe your gem
+Why? Why not.
 
 ## Installation
 
@@ -22,7 +22,35 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require 'sparsematrix'
+sparse = SparseMatrix::YaleSparseMatrix.new 0
+(1..10).each { |n| sparse[n, n] = 1 }
+sparse.each_with_index { |value, row, column| puts "sparse[#{row}, #{column}] = #{value}" }
+# sparse[1, 1] = 1
+# sparse[2, 2] = 1
+# sparse[3, 3] = 1
+# sparse[4, 4] = 1
+# sparse[5, 5] = 1
+# sparse[6, 6] = 1
+# sparse[7, 7] = 1
+# sparse[8, 8] = 1
+# sparse[9, 9] = 1
+# sparse[10, 10] = 1
+puts sparse.inspect(true)
+# SparseMatrix::YaleSparseMatrix[
+# [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+# [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+# [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+# [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+# [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+# [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+# [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+# [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+# [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+# [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+# [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]] # efficient 8.26% density
+```
 
 ## Development
 
@@ -38,4 +66,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
