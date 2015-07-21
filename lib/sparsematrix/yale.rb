@@ -91,7 +91,7 @@ module SparseMatrix
     def [](row, column)
       index = element_index row, column
       return zero unless index
-      elements[index] || zero
+      elements[index]
     end
     alias_method :element, :[]
     alias_method :component, :[]
