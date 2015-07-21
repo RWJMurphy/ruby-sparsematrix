@@ -267,11 +267,11 @@ module SparseMatrix
     # @param column [Numeric]
     # @return [Numeric, nil]
     def element_index(row, column)
-      index = row_index_min = row_index[row]
-      row_index_max = row_index[row + 1]
-      return nil unless row_index_min && row_index_max
-      return nil if row_index_min == row_index_max
-      while index < row_index_max
+      index = row_start = row_index[row]
+      row_end = row_index[row + 1]
+      return nil unless row_start && row_end
+      return nil if row_start == row_end
+      while index < row_end
         current_column = index_column[index]
         return index if current_column == column
         if current_column > column
@@ -279,6 +279,7 @@ module SparseMatrix
         end
         index += 1
       end
+      nil
     end
 
     # Sets the number of non-zero elements. For reasons, this is stored as the
